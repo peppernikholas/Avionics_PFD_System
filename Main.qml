@@ -17,8 +17,8 @@ Window {
         color: "black"
         clip: true
 
-        property double pitch_angle: 0.0
-        property double roll_angle: 0.0
+        property double pitch_angle: flightData.pitch
+        property double roll_angle:flightData.roll
 
         Item {
             id: horizonContainer
@@ -100,14 +100,18 @@ Window {
 
             Text { text: "Pitch (Längs): " + Math.round(root.pitch_angle); color: "white" }
             Slider {
-                from: -45; to: 45; value: 0
-                onMoved: root.pitch_angle = value // Nota: onMoved è meglio di onValueChanged per gli slider
+                from: -45; to: 45; //value: 0
+                //onMoved: root.pitch_angle = value // Nota: onMoved è meglio di onValueChanged per gli slider
+                value: root.pitch_angle
+                onMoved: flightData.setPitch(value)
             }
 
             Text { text: "Roll (Quer): " + Math.round(root.roll_angle); color: "white" }
             Slider {
-                from: -90; to: 90; value: 0
-                onMoved: root.roll_angle = value
+                from: -90; to: 90; //value: 0
+                //onMoved: root.roll_angle = value
+                value: root.roll_angle
+                onMoved: flightData.setRoll(value)
             }
         }
     }
